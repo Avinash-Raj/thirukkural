@@ -24,6 +24,7 @@ export default class HomeScreen extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <ScrollView>
         <SafeAreaView
@@ -35,21 +36,33 @@ export default class HomeScreen extends Component {
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <Button
-                onPress={() => this.props.navigation.openDrawer()}
+                onPress={() =>
+                  navigate("ChapterGroup", {
+                    title: strings.araththuppaal,
+                    no: 1
+                  })
+                }
                 title={strings.araththuppaal}
               />
             </View>
 
             <View style={styles.button}>
               <Button
-                onPress={() => this.props.navigation.navigate("Friends")}
+                onPress={() =>
+                  navigate("ChapterGroup", { title: strings.porutpaal, no: 2 })
+                }
                 title={strings.porutpaal}
               />
             </View>
 
             <View style={styles.button}>
               <Button
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() =>
+                  navigate("ChapterGroup", {
+                    title: strings.Kaamaththuppaal,
+                    no: 3
+                  })
+                }
                 title={strings.Kaamaththuppaal}
               />
             </View>
@@ -78,6 +91,6 @@ const styles = StyleSheet.create({
     height: 24
   },
   button: {
-    padding: 10
+    padding: 20
   }
 });

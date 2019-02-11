@@ -3,13 +3,19 @@ import { createStackNavigator, createDrawerNavigator } from "react-navigation";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import DrawerComponent from "./components/DrawerComponent";
 import HomeScreen from "./screens/HomeScreen";
-import FriendsScreen from "./screens/FriendsScreen";
+import ChapterGroupScreen from "./screens/ChapterGroupScreen";
+import ChapterScreen from "./screens/ChapterScreen";
+import KuralScreen from "./screens/KuralScreen";
+import KuralDetailScreen from "./screens/KuralDetailScreen";
 import colors from "./colors";
 
 const RootStack = createStackNavigator(
   {
-    Home: { screen: HomeScreen },
-    Friends: { screen: FriendsScreen }
+    Home: { screen: HomeScreen }, // paal list screen
+    ChapterGroup: { screen: ChapterGroupScreen },
+    Chapter: { screen: ChapterScreen },
+    Kural: { screen: KuralScreen },
+    KuralDetail: { screen: KuralDetailScreen }
   },
   {
     defaultNavigationOptions: ({ navigation }) => {
@@ -37,8 +43,6 @@ const RootStack = createStackNavigator(
 
 const DrawerStack = createDrawerNavigator(
   {
-    // Home: { screen: HomeScreen },
-    // Friends: { screen: FriendsScreen }
     Home: RootStack
   },
 
@@ -47,7 +51,6 @@ const DrawerStack = createDrawerNavigator(
     contentOptions: {
       activeTintColor: colors.tintColor
     },
-    unmountInactiveRoutes: true,
     contentComponent: DrawerComponent,
     defaultNavigationOptions: {
       drawerIcon: ({ tintColor }) => (

@@ -7,11 +7,29 @@ import {
   Text
 } from "react-native";
 import { DrawerItems } from "react-navigation";
+import { NavigationActions, StackActions } from "react-navigation";
 import colors from "../colors";
 import Logo from "../../assets/logo.png";
 import strings from "../strings";
 
 export default class DrawerComponent extends Component {
+  resetStack = (route, focused) => {
+    console.log(route);
+    this.props.navigation.dispatch(
+      StackActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: "Home"
+          }),
+          NavigationActions.navigate({
+            routeName: "ChapterGroup",
+            params: { title: "araththuppaal", no: 1 }
+          })
+        ]
+      })
+    );
+  };
   render() {
     return (
       <ScrollView style={{ backgroundColor: colors.primaryBlack }}>
@@ -32,6 +50,7 @@ export default class DrawerComponent extends Component {
           </Text>
           <DrawerItems
             {...this.props}
+            onItemPress={this.resetStack}
             activeTintColor={colors.primaryWhite}
             activeBackgroundColor={colors.highlightBlack}
             inactiveTintColor={colors.secondaryGrey}
