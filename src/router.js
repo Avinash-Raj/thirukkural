@@ -35,6 +35,15 @@ const RootStack = createStackNavigator(
             name="menu"
             size={24}
           />
+        ),
+        headerRight: (
+          <MaterialIcons
+            style={{ marginRight: 10, padding: 10 }}
+            // color={colors.tintColor}
+            onPress={() => navigation.navigate("Home")}
+            name="home"
+            size={24}
+          />
         )
       };
     }

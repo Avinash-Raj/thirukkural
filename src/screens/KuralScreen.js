@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
 // each chapter group screen which lists chapters
 export default class KuralScreen extends Component {
@@ -12,6 +12,10 @@ export default class KuralScreen extends Component {
     return (
       <View>
         <Text> KuralSCreen </Text>
+        <Button
+          onPress={() => this.props.navigation.navigate("KuralDetail")}
+          title="Kural list"
+        />
       </View>
     );
   }
