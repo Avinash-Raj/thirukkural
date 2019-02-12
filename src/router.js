@@ -52,7 +52,12 @@ const RootStack = createStackNavigator(
 
 const DrawerStack = createDrawerNavigator(
   {
-    Home: RootStack
+    Home: {
+      screen: RootStack,
+      params: { id: 1 }
+    },
+    Kural: { screen: ChapterGroupScreen, params: { id: 2 } },
+    Detail: { screen: ChapterGroupScreen, params: { id: 3 } }
   },
 
   {
@@ -60,6 +65,7 @@ const DrawerStack = createDrawerNavigator(
     contentOptions: {
       activeTintColor: colors.tintColor
     },
+    swipeEnabled: true,
     contentComponent: DrawerComponent,
     defaultNavigationOptions: {
       drawerIcon: ({ tintColor }) => (

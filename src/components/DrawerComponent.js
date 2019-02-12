@@ -4,7 +4,8 @@ import {
   ScrollView,
   SafeAreaView,
   Image,
-  Text
+  Text,
+  View
 } from "react-native";
 import { DrawerItems } from "react-navigation";
 import { NavigationActions, StackActions } from "react-navigation";
@@ -13,8 +14,11 @@ import Logo from "../../assets/logo.png";
 import strings from "../strings";
 
 export default class DrawerComponent extends Component {
-  resetStack = (route, focused) => {
-    console.log(route);
+  resetStack = route => {
+    let pressedDrwaerItem = route.route.key;
+    let id = route.route.params.id;
+    route.route.focused = true;
+    console.log(pressedDrwaerItem);
     this.props.navigation.dispatch(
       StackActions.reset({
         index: 1,
@@ -24,7 +28,7 @@ export default class DrawerComponent extends Component {
           }),
           NavigationActions.navigate({
             routeName: "ChapterGroup",
-            params: { title: "araththuppaal", no: 1 }
+            params: { title: pressedDrwaerItem, no: id }
           })
         ]
       })
