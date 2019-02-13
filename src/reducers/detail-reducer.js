@@ -6,18 +6,18 @@ import {
   FETCH_DATA_SUCCESS
 } from "../constants/action-types";
 import detailsjson from "../data/detail.json";
+import kuraljson from "../data/thirukkural.json";
 
 initialState = {
   info: {},
   lang: "ta",
   isLoading: false,
-  error: false,
-  details: detailsjson.details
+  error: false
 };
 
 const getSection = sectionId => {
   // get specific section
-  return initialState.details.section.detail[
+  return detailsjson.details.section.detail[
     sectionId - 1 // since array index starts from 0
   ];
 };
@@ -42,6 +42,10 @@ const getChapterGroupNames = state => {
 };
 
 const getKurals = state => {
+  if (state.chapterNumber) {
+    let range = state.chapterNumber.split("-");
+    return kuraljson.kural.slice(range[0] - 1, range[1]);
+  }
   return [];
 };
 
@@ -53,7 +57,11 @@ const getChapterNames = state => {
     state.sectionId,
     state.chapterGroupNumber
   ).chapters.detail.forEach(chapter => {
-    chapters.push({ name: chapter[key], number: chapter.number });
+    chapters.push({
+      name: chapter[key],
+      number: chapter.number,
+      kuralRange: chapter.start + "-" + chapter.end
+    });
   });
   return chapters;
 };
@@ -95,7 +103,7 @@ const detailReducer = (state = initialState, action) => {
     case "UPDATE_CHAPTER_NO_NAME": {
       return {
         ...clonedState,
-        chapterNumber: action.payload.chapterNumber,
+        chapterNumber: action.payload.chapterNumber, // gets kural range 1-10
         chapterName: action.payload.chapterName
       };
     }

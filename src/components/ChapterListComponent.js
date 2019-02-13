@@ -17,7 +17,7 @@ class ChapterListComponent extends Component {
       <View style={{ padding: 10 }} key={chapter.number}>
         <Button
           onPress={() => {
-            this.props.updateChapterNoAndName(chapter.number, chapter.name);
+            this.props.updateChapterNoAndName(chapter.kuralRange, chapter.name);
             this.props.navigation.navigate("Kural", { title: chapter.name });
           }}
           title={chapter.name}
