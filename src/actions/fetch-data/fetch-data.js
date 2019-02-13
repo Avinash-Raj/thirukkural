@@ -12,6 +12,10 @@ export const getChapterGroups = () => {
   return { type: "GET_CHAPTER_GROUPS", payload: {} };
 };
 
+export const getKurals = () => {
+  return { type: "GET_KURALS", payload: {} };
+};
+
 export const updateSectionId = sectionId => {
   return {
     type: "UPDATE_SECTION_ID",

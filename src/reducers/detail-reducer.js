@@ -41,6 +41,10 @@ const getChapterGroupNames = state => {
   return groups;
 };
 
+const getKurals = state => {
+  return [];
+};
+
 const getChapterNames = state => {
   key = state.lang == "en" ? "translation" : "name";
   let chapters = [];
@@ -67,6 +71,12 @@ const detailReducer = (state = initialState, action) => {
       return {
         ...clonedState,
         chapters: getChapterNames(clonedState)
+      };
+    }
+    case "GET_KURALS": {
+      return {
+        ...clonedState,
+        kurals: getKurals(clonedState)
       };
     }
     case "UPDATE_SECTION_ID": {
