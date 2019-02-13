@@ -1,36 +1,50 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
+import {
+  getChapterGroups,
+  updateChapterGroupNumber
+} from "../actions/fetch-data/fetch-data";
 
 class ChapterGroupListComponent extends Component {
-  state = { chapterGroups: [] };
-  fetchChapterGroups = sectionId => {
-    console.log(sectionId);
-    switch (sectionId) {
-      case 1:
-        return ["foo1", "bar1"];
-      case 2:
-        return ["foo2", "bar2"];
-      case 3:
-        return ["foo3", "bar3"];
-    }
-  };
   componentDidMount() {
-    this.setState({
-      chapterGroups: this.fetchChapterGroups(this.props.sectionId)
-    });
+    this.props.getChapterGroups(this.props.sectionId);
   }
+
   render() {
-    const groups = this.state.chapterGroups.map(groupName => (
-      <View style={{ padding: 10 }} key={groupName.toString()}>
+    const groups = this.props.chapterGroups.map((group, id) => (
+      <View style={{ padding: 10 }} key={group.number}>
         <Button
-          onPress={() => this.props.navigation.navigate("Chapter")}
-          title={groupName}
+          onPress={() => {
+            this.props.updateChapterGroupNumber(group.number);
+            this.props.navigation.navigate("Chapter");
+          }}
+          title={group.name}
         />
       </View>
     ));
+
     return <View style={{ flex: 1, padding: 10 }}>{groups}</View>;
   }
 }
 
-export default withNavigation(ChapterGroupListComponent);
+const mapStateToProps = state => {
+  return {
+    chapterGroups: state.details.chapterGroups || []
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  updateChapterGroupNumber: groupNumber => {
+    dispatch(updateChapterGroupNumber(groupNumber));
+  },
+  getChapterGroups: sectionId => {
+    dispatch(getChapterGroups(sectionId));
+  }
+});
+const ChapterGroupListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChapterGroupListComponent);
+
+export default withNavigation(ChapterGroupListContainer);
