@@ -10,11 +10,11 @@ class ChapterGroupListComponent extends Component {
   }
 
   render() {
-    const groups = this.props.chapterGroups.map(groupName => (
-      <View style={{ padding: 10 }} key={groupName.toString()}>
+    const groups = this.props.chapterGroups.map((group, id) => (
+      <View style={{ padding: 10 }} key={group.number}>
         <Button
           onPress={() => this.props.navigation.navigate("Chapter")}
-          title={groupName}
+          title={group.name}
         />
       </View>
     ));

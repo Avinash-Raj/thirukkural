@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
 
 class ChapterListComponent extends Component {
-  state = { chapters: ["Chapter 1", "Chapter 2"] };
+  componentDidMount() {
+    this.props.getChapterGroups(this.props.sectionId);
+  }
+
   render() {
-    const chapters = this.state.chapters.map(chapterName => (
+    const chapters = this.props.chapters.map(chapterName => (
       <View style={{ padding: 10 }} key={chapterName.toString()}>
         <Button
           onPress={() => this.props.navigation.navigate("Kural")}
@@ -17,4 +21,19 @@ class ChapterListComponent extends Component {
   }
 }
 
-export default withNavigation(ChapterListComponent);
+const mapStateToProps = state => {
+  return {
+    chapterGroups: state.details.chapters || []
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  getChapterGroups: sectionId => {
+    dispatch(getChapterGroups(sectionId));
+  }
+});
+const ChapterListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChapterListComponent);
+
+export default withNavigation(ChapterListContainer);

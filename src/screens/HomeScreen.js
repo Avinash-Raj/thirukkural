@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { SafeAreaView } from "react-navigation";
 import {
@@ -10,8 +11,9 @@ import {
   StatusBar
 } from "react-native";
 import strings from "../strings";
+import { updateSectionId } from "../actions/fetch-data/fetch-data";
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = {
     headerTitle: strings.appname,
     drawerIcon: ({ tintColor }) => (
@@ -36,33 +38,36 @@ export default class HomeScreen extends Component {
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <Button
-                onPress={() =>
+                onPress={() => {
+                  this.props.updateSectionId(1);
                   navigate("ChapterGroup", {
                     title: strings.araththuppaal,
                     no: 1
-                  })
-                }
+                  });
+                }}
                 title={strings.araththuppaal}
               />
             </View>
 
             <View style={styles.button}>
               <Button
-                onPress={() =>
-                  navigate("ChapterGroup", { title: strings.porutpaal, no: 2 })
-                }
+                onPress={() => {
+                  this.props.updateSectionId(2);
+                  navigate("ChapterGroup", { title: strings.porutpaal, no: 2 });
+                }}
                 title={strings.porutpaal}
               />
             </View>
 
             <View style={styles.button}>
               <Button
-                onPress={() =>
+                onPress={() => {
+                  this.props.updateSectionId(3);
                   navigate("ChapterGroup", {
                     title: strings.Kaamaththuppaal,
                     no: 3
-                  })
-                }
+                  });
+                }}
                 title={strings.Kaamaththuppaal}
               />
             </View>
@@ -94,3 +99,15 @@ const styles = StyleSheet.create({
     padding: 20
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  updateSectionId: sectionId => {
+    dispatch(updateSectionId(sectionId));
+  }
+});
+const HomeScreenContainer = connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);
+
+export default HomeScreenContainer;
