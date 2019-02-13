@@ -4,7 +4,7 @@ import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
 import {
   getChapterGroups,
-  updateChapterGroupNumber
+  updateChapterGroupNoAndName
 } from "../actions/fetch-data/fetch-data";
 
 class ChapterGroupListComponent extends Component {
@@ -17,8 +17,8 @@ class ChapterGroupListComponent extends Component {
       <View style={{ padding: 10 }} key={group.number}>
         <Button
           onPress={() => {
-            this.props.updateChapterGroupNumber(group.number);
-            this.props.navigation.navigate("Chapter");
+            this.props.updateChapterGroupNoAndName(group.number, group.name);
+            this.props.navigation.navigate("Chapter", { title: group.name });
           }}
           title={group.name}
         />
@@ -35,8 +35,8 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
-  updateChapterGroupNumber: groupNumber => {
-    dispatch(updateChapterGroupNumber(groupNumber));
+  updateChapterGroupNoAndName: (gno, gname) => {
+    dispatch(updateChapterGroupNoAndName(gno, gname));
   },
   getChapterGroups: sectionId => {
     dispatch(getChapterGroups(sectionId));

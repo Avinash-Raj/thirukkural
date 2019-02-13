@@ -3,10 +3,12 @@ import { View, Text, Button } from "react-native";
 
 // each chapter group screen which lists chapters
 export default class KuralScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    return {
+      title: `${state.params.title}`
+    };
+  };
 
   render() {
     return (

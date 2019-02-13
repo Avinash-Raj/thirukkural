@@ -19,16 +19,16 @@ export const updateSectionId = sectionId => {
   };
 };
 
-export const updateChapterGroupNumber = chapterGroupNumber => {
+export const updateChapterGroupNoAndName = (gno, gname) => {
   return {
-    type: "UPDATE_CHAPTER_GROUP_NO",
-    payload: { chapterGroupNumber: chapterGroupNumber }
+    type: "UPDATE_CHAPTER_GROUP_NO_NAME",
+    payload: { chapterGroupNumber: gno, chapterGroupName: gname }
   };
 };
 
-export const updateChapterNumber = chapterNumber => {
+export const updateChapterNoAndName = (cno, cname) => {
   return {
-    type: "UPDATE_CHAPTER_NO",
-    payload: { chapterNumber: chapterNumber }
+    type: "UPDATE_CHAPTER_NO_NAME",
+    payload: { chapterNumber: cno, chapterName: cname }
   };
 };

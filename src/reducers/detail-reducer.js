@@ -44,6 +44,7 @@ const getChapterGroupNames = state => {
 const getChapterNames = state => {
   key = state.lang == "en" ? "translation" : "name";
   let chapters = [];
+  console.log("on get chap names", state.chapterGroupName);
   getChapterGroup(
     state.sectionId,
     state.chapterGroupNumber
@@ -63,9 +64,6 @@ const detailReducer = (state = initialState, action) => {
       };
     }
     case "GET_CHAPTERS": {
-      console.log("on get chapters");
-      console.log(clonedState.sectionId);
-      console.log(clonedState.chapterGroupNumber);
       return {
         ...clonedState,
         chapters: getChapterNames(clonedState)
@@ -77,16 +75,18 @@ const detailReducer = (state = initialState, action) => {
         sectionId: action.payload.sectionId
       };
     }
-    case "UPDATE_CHAPTER_GROUP_NO": {
+    case "UPDATE_CHAPTER_GROUP_NO_NAME": {
       return {
         ...clonedState,
-        chapterGroupNumber: action.payload.chapterGroupNumber
+        chapterGroupNumber: action.payload.chapterGroupNumber,
+        chapterGroupName: action.payload.chapterGroupName
       };
     }
-    case "UPDATE_CHAPTER_NO": {
+    case "UPDATE_CHAPTER_NO_NAME": {
       return {
         ...clonedState,
-        chapterNumber: action.payload.chapterNumber
+        chapterNumber: action.payload.chapterNumber,
+        chapterName: action.payload.chapterName
       };
     }
     default: {
