@@ -2,18 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
+import {
+  getChapters
+  // updateChapterGroupNumber
+} from "../actions/fetch-data/fetch-data";
 
 class ChapterListComponent extends Component {
   componentDidMount() {
-    this.props.getChapterGroups(this.props.sectionId);
+    this.props.getChapters();
   }
 
   render() {
-    const chapters = this.props.chapters.map(chapterName => (
-      <View style={{ padding: 10 }} key={chapterName.toString()}>
+    const chapters = this.props.chapters.map(chapter => (
+      <View style={{ padding: 10 }} key={chapter.number}>
         <Button
           onPress={() => this.props.navigation.navigate("Kural")}
-          title={chapterName}
+          title={chapter.name}
         />
       </View>
     ));
@@ -23,12 +27,12 @@ class ChapterListComponent extends Component {
 
 const mapStateToProps = state => {
   return {
-    chapterGroups: state.details.chapters || []
+    chapters: state.details.chapters || []
   };
 };
 const mapDispatchToProps = dispatch => ({
-  getChapterGroups: sectionId => {
-    dispatch(getChapterGroups(sectionId));
+  getChapters: () => {
+    dispatch(getChapters());
   }
 });
 const ChapterListContainer = connect(

@@ -23,11 +23,13 @@ const getSection = sectionId => {
 };
 
 const getChapterGroup = (sectionId, chapterGroupNo) => {
+  let cg;
   getSection(sectionId).chapterGroup.detail.forEach((chapterGroup, idx) => {
     if (chapterGroup.number === chapterGroupNo) {
-      return chapterGroup;
+      cg = chapterGroup;
     }
   });
+  return cg;
 };
 
 const getChapterGroupNames = state => {
@@ -39,46 +41,34 @@ const getChapterGroupNames = state => {
   return groups;
 };
 
-const getChapterNames = (state, sectionId, chapterGroupNo) => {
+const getChapterNames = state => {
   key = state.lang == "en" ? "translation" : "name";
   let chapters = [];
-  // getSection(sectionId).chapterGroup.detail.forEach((chapterGroup, idx) => {
-  //   if (chapterGroup.number === chapterGroupNo) {
-  //     chapterGroup.chapters.detial.forEach(chapter => {
-  //       chapters.push(chapter[key]);
-  //     });
-  //   }
-  // });
-  getChapterGroup(sectionId, chapterGroupNo).chapters.forEach.forEach(
-    chapter => {
-      chapters.push({ name: chapter[key], number: chapter.number });
-    }
-  );
+  getChapterGroup(
+    state.sectionId,
+    state.chapterGroupNumber
+  ).chapters.detail.forEach(chapter => {
+    chapters.push({ name: chapter[key], number: chapter.number });
+  });
   return chapters;
 };
 
 const detailReducer = (state = initialState, action) => {
   let clonedState = { ...state };
-  // clonedState.lang = state.lang;
   switch (action.type) {
     case "GET_CHAPTER_GROUPS": {
-      // action.payload.sectionId
       return {
         ...clonedState,
-        chapterGroups: getChapterGroupNames(
-          clonedState
-          // action.payload.sectionId
-        )
+        chapterGroups: getChapterGroupNames(clonedState)
       };
     }
     case "GET_CHAPTERS": {
+      console.log("on get chapters");
+      console.log(clonedState.sectionId);
+      console.log(clonedState.chapterGroupNumber);
       return {
         ...clonedState,
-        chapters: getChapterNames(
-          clonedState,
-          action.payload.sectionId,
-          action.payload.chapterGroupNo
-        )
+        chapters: getChapterNames(clonedState)
       };
     }
     case "UPDATE_SECTION_ID": {
