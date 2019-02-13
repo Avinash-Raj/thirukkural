@@ -6,18 +6,18 @@ import {
   FETCH_DATA_SUCCESS
 } from "../constants/action-types";
 import detailsjson from "../data/detail.json";
+import kuraljson from "../data/thirukkural.json";
 
 initialState = {
   info: {},
   lang: "ta",
   isLoading: false,
-  error: false,
-  details: detailsjson.details
+  error: false
 };
 
 const getSection = sectionId => {
   // get specific section
-  return initialState.details.section.detail[
+  return detailsjson.details.section.detail[
     sectionId - 1 // since array index starts from 0
   ];
 };
@@ -41,14 +41,27 @@ const getChapterGroupNames = state => {
   return groups;
 };
 
+const getKurals = state => {
+  if (state.chapterNumber) {
+    let range = state.chapterNumber.split("-");
+    return kuraljson.kural.slice(range[0] - 1, range[1]);
+  }
+  return [];
+};
+
 const getChapterNames = state => {
   key = state.lang == "en" ? "translation" : "name";
   let chapters = [];
+  console.log("on get chap names", state.chapterGroupName);
   getChapterGroup(
     state.sectionId,
     state.chapterGroupNumber
   ).chapters.detail.forEach(chapter => {
-    chapters.push({ name: chapter[key], number: chapter.number });
+    chapters.push({
+      name: chapter[key],
+      number: chapter.number,
+      kuralRange: chapter.start + "-" + chapter.end
+    });
   });
   return chapters;
 };
@@ -63,12 +76,15 @@ const detailReducer = (state = initialState, action) => {
       };
     }
     case "GET_CHAPTERS": {
-      console.log("on get chapters");
-      console.log(clonedState.sectionId);
-      console.log(clonedState.chapterGroupNumber);
       return {
         ...clonedState,
         chapters: getChapterNames(clonedState)
+      };
+    }
+    case "GET_KURALS": {
+      return {
+        ...clonedState,
+        kurals: getKurals(clonedState)
       };
     }
     case "UPDATE_SECTION_ID": {
@@ -77,16 +93,18 @@ const detailReducer = (state = initialState, action) => {
         sectionId: action.payload.sectionId
       };
     }
-    case "UPDATE_CHAPTER_GROUP_NO": {
+    case "UPDATE_CHAPTER_GROUP_NO_NAME": {
       return {
         ...clonedState,
-        chapterGroupNumber: action.payload.chapterGroupNumber
+        chapterGroupNumber: action.payload.chapterGroupNumber,
+        chapterGroupName: action.payload.chapterGroupName
       };
     }
-    case "UPDATE_CHAPTER_NO": {
+    case "UPDATE_CHAPTER_NO_NAME": {
       return {
         ...clonedState,
-        chapterNumber: action.payload.chapterNumber
+        chapterNumber: action.payload.chapterNumber, // gets kural range 1-10
+        chapterName: action.payload.chapterName
       };
     }
     default: {

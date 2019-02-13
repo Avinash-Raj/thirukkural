@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { ScrollView, Text, Button } from "react-native";
+import KuralListComponent from "../components/KuralListComponent";
 
 // each chapter group screen which lists chapters
 export default class KuralScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    return {
+      title: `${state.params.title}`
+    };
+  };
 
   render() {
     return (
-      <View>
-        <Text> KuralSCreen </Text>
-        <Button
-          onPress={() => this.props.navigation.navigate("KuralDetail")}
-          title="Kural list"
-        />
-      </View>
+      <ScrollView>
+        <KuralListComponent />
+        <Button title="Back" onPress={() => this.props.navigation.goBack()} />
+      </ScrollView>
     );
   }
 }

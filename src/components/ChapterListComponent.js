@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
 import {
-  getChapters
-  // updateChapterGroupNumber
+  getChapters,
+  updateChapterNoAndName
 } from "../actions/fetch-data/fetch-data";
 
 class ChapterListComponent extends Component {
@@ -16,7 +16,10 @@ class ChapterListComponent extends Component {
     const chapters = this.props.chapters.map(chapter => (
       <View style={{ padding: 10 }} key={chapter.number}>
         <Button
-          onPress={() => this.props.navigation.navigate("Kural")}
+          onPress={() => {
+            this.props.updateChapterNoAndName(chapter.kuralRange, chapter.name);
+            this.props.navigation.navigate("Kural", { title: chapter.name });
+          }}
           title={chapter.name}
         />
       </View>
@@ -31,6 +34,9 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
+  updateChapterNoAndName: (cno, cname) => {
+    dispatch(updateChapterNoAndName(cno, cname));
+  },
   getChapters: () => {
     dispatch(getChapters());
   }
