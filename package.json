@@ -14,7 +14,10 @@
     "react-native-navigation": "^2.10.0",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.2.1",
-    "react-navigation-drawer": "^1.1.0"
+    "react-navigation-drawer": "^1.1.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",

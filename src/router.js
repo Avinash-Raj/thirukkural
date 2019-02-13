@@ -25,7 +25,7 @@ const RootStack = createStackNavigator(
         },
         headerTitleStyle: {
           textAlign: "center",
-          flex: 0.8
+          flex: 1
         },
         headerLeft: (
           <MaterialIcons
