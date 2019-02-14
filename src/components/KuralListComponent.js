@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { View, Button, Text } from "react-native";
 import { withNavigation } from "react-navigation";
 import { getKurals } from "../actions/fetch-data/fetch-data";
-import { gray, green } from "ansi-colors";
 import colors from "../colors";
 
 class KuralListComponent extends Component {

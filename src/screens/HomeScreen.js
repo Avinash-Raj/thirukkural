@@ -8,13 +8,31 @@ import {
   Button,
   StyleSheet,
   ScrollView,
-  StatusBar
+  StatusBar,
+  Modal,
+  Alert,
+  TouchableHighlight
 } from "react-native";
 import strings from "../strings";
 import { updateSectionId } from "../actions/fetch-data/fetch-data";
 
 class HomeScreen extends Component {
-  static navigationOptions = {
+  state = {
+    modalVisible: false
+  };
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+  componentDidMount() {
+    this.props.navigation.setParams({
+      openModal: this.modal.bind(this)
+    });
+  }
+  modal() {
+    this.setModalVisible(true);
+  }
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: strings.appname,
     drawerIcon: ({ tintColor }) => (
       <MaterialIcons
@@ -22,8 +40,19 @@ class HomeScreen extends Component {
         size={24}
         style={{ color: tintColor }}
       />
+    ),
+    headerRight: (
+      <MaterialIcons
+        style={{ marginRight: 10, padding: 10 }}
+        // color={colors.tintColor}
+        onPress={() => {
+          navigation.state.params.openModal();
+        }}
+        name="language"
+        size={24}
+      />
     )
-  };
+  });
 
   render() {
     const { navigate } = this.props.navigation;
@@ -72,6 +101,28 @@ class HomeScreen extends Component {
               />
             </View>
           </View>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+            }}
+          >
+            <View style={{ marginTop: 22 }}>
+              <View>
+                <Text>Hello World!</Text>
+
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}
+                >
+                  <Text>Hide Modal</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
         </SafeAreaView>
         <StatusBar barStyle="default" />
       </ScrollView>
