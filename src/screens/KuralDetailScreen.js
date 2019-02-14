@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 export default class KuralDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -12,33 +12,33 @@ export default class KuralDetailScreen extends Component {
     let detail = this.props.navigation.state.params.details;
     if (this.props.lang === "en") {
       return (
-        <View>
-          <Text>
+        <View style={styles.container}>
+          <Text style={styles.kural}>
             {detail.Translation} {"\n"}
           </Text>
-          <Text>
+          <Text style={styles.explanation}>
             Explanation: {detail.explanation} {"\n"}
           </Text>
-          <Text>
+          <Text style={styles.explanation}>
             Couplet: {detail.couplet} {"\n"}
           </Text>
         </View>
       );
     } else {
       return (
-        <View>
-          <Text>
+        <View style={styles.container} elevation={5}>
+          <Text style={styles.kural}>
             {detail.Line1}
             {"\n"}
             {detail.Line2}
           </Text>
-          <Text>
+          <Text style={styles.explanation}>
             mv: {detail.mv} {"\n"}
           </Text>
-          <Text>
+          <Text style={styles.explanation}>
             sp: {detail.sp} {"\n"}
           </Text>
-          <Text>
+          <Text style={styles.explanation}>
             mk: {detail.mk} {"\n"}
           </Text>
         </View>
@@ -49,3 +49,11 @@ export default class KuralDetailScreen extends Component {
     return <ScrollView>{this.renderDetails()}</ScrollView>;
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20
+  },
+  kural: { padding: 10, fontSize: 15, fontWeight: "bold" },
+  explanation: { padding: 10 }
+});

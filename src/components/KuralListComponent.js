@@ -4,6 +4,7 @@ import { View, Button, Text } from "react-native";
 import { withNavigation } from "react-navigation";
 import { getKurals } from "../actions/fetch-data/fetch-data";
 import { gray, green } from "ansi-colors";
+import colors from "../colors";
 
 class KuralListComponent extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class KuralListComponent extends Component {
   render() {
     const kurals = this.props.kurals.map(kural => (
       <View
-        style={{ padding: 10, borderWidth: 1, borderColor: "green" }}
+        style={{ padding: 10, borderWidth: 1, borderColor: colors.tintColor }}
         key={kural.Number}
       >
         <Text
