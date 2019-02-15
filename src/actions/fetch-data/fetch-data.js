@@ -36,3 +36,8 @@ export const updateChapterNoAndName = (cno, cname) => {
     payload: { chapterNumber: cno, chapterName: cname }
   };
 };
+
+export const updateLanguage = lang => ({
+  type: "UPDATE_LANGUAGE",
+  payload: { language: lang }
+});

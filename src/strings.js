@@ -7,16 +7,18 @@ let strings = new LocalizedStrings({
     porutpaal: "பொருட்பால்",
     Kaamaththuppaal: "காமத்துப்பால்",
     section: "பால்",
-    chapters: "அதிகாரம்"
+    chapters: "அதிகாரம்",
+    tamil: "தமிழ்"
+  },
+  en: {
+    appname: "Thirukkural",
+    araththuppaal: "Virtue",
+    section: "section",
+    chapters: "chapters",
+    porutpaal: "Wealth",
+    Kaamaththuppaal: "Love",
+    tamil: "tamil"
   }
-  //   en: {
-  //     appname: "Thirukkural",
-  //     araththuppaal: "Virtue",
-  //     section: "section",
-  //     chapters: "chapters",
-  //        porutpaal: "Wealth",
-  // Kaamaththuppaal: "Love"
-  //   }
 });
 
 export default strings;

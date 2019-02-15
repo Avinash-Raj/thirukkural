@@ -9,12 +9,16 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
-  Modal,
-  Alert,
+  Picker,
   TouchableHighlight
 } from "react-native";
+import Modal from "react-native-modal";
 import strings from "../strings";
-import { updateSectionId } from "../actions/fetch-data/fetch-data";
+import {
+  updateSectionId,
+  updateLanguage
+} from "../actions/fetch-data/fetch-data";
+import { grey } from "ansi-colors";
 
 class HomeScreen extends Component {
   state = {
@@ -53,6 +57,11 @@ class HomeScreen extends Component {
       />
     )
   });
+
+  changeThisTitle = () => {
+    const { setParams } = this.props.navigation;
+    setParams({ title: strings.appname });
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -102,25 +111,33 @@ class HomeScreen extends Component {
             </View>
           </View>
           <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-            }}
+            isVisible={this.state.modalVisible}
+            onBackdropPress={() => this.setModalVisible(false)}
           >
-            <View style={{ marginTop: 22 }}>
-              <View>
-                <Text>Hello World!</Text>
-
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}
-                >
-                  <Text>Hide Modal</Text>
-                </TouchableHighlight>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.headerText}>Choose Language</Text>
               </View>
+              <Picker
+                mode="dropdown"
+                selectedValue={this.props.lang}
+                style={{ height: 50, width: 120, padding: 10 }}
+                onValueChange={(itemValue, itemIndex) => {
+                  strings.setLanguage(itemValue);
+                  this.props.updateLanguage(itemValue);
+                  this.changeThisTitle();
+                }}
+              >
+                <Picker.Item label="தமிழ்" value="ta" />
+                <Picker.Item label="English" value="en" />
+              </Picker>
+              <Button
+                style="{{ marginLeft: 10, }}"
+                onPress={() => {
+                  this.setModalVisible(false);
+                }}
+                title="OK"
+              />
             </View>
           </Modal>
         </SafeAreaView>
@@ -137,6 +154,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  headerText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    borderBottomWidth: 1,
+    borderColor: "grey"
+  },
+  modalHeader: {
+    justifyContent: "center",
+    borderColor: "grey",
+    padding: 10
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    borderColor: "rgba(0, 0, 0, 0.1)"
+  },
   buttonContainer: {
     flex: 1,
     padding: 10,
@@ -151,13 +187,25 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = state => {
+  let { lang } = state.details;
+  if (strings.getLanguage() !== lang) {
+    strings.setLanguage(lang);
+  }
+  return {
+    lang: lang
+  };
+};
 const mapDispatchToProps = dispatch => ({
   updateSectionId: sectionId => {
     dispatch(updateSectionId(sectionId));
+  },
+  updateLanguage: lang => {
+    dispatch(updateLanguage(lang));
   }
 });
 const HomeScreenContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);
 

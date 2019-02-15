@@ -87,6 +87,11 @@ const detailReducer = (state = initialState, action) => {
         kurals: getKurals(clonedState)
       };
     }
+    case "UPDATE_LANGUAGE": {
+      return {
+        lang: action.payload.language
+      };
+    }
     case "UPDATE_SECTION_ID": {
       return {
         ...clonedState,
