@@ -34,17 +34,13 @@ class HomeScreen extends Component {
   }
   static navigationOptions = ({ navigation }) => ({
     headerTitle: strings.appname,
-    drawerIcon: ({ tintColor }) => (
-      <MaterialIcons
-        name="move-to-inbox"
-        size={24}
-        style={{ color: tintColor }}
-      />
-    ),
+    headerTitleStyle: {
+      textAlign: "center",
+      flex: 1
+    },
     headerRight: (
       <MaterialIcons
         style={{ marginRight: 10, padding: 10 }}
-        // color={colors.tintColor}
         onPress={() => {
           navigation.state.params.openModal();
         }}
