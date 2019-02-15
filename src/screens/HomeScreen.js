@@ -14,11 +14,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import strings from "../strings";
-import {
-  updateSectionId,
-  updateLanguage
-} from "../actions/fetch-data/fetch-data";
-import { grey } from "ansi-colors";
+import { updateSectionId, updateLanguage } from "../actions";
 
 class HomeScreen extends Component {
   state = {

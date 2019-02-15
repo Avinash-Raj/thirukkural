@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import { withNavigation } from "react-navigation";
-import {
-  getChapters,
-  updateChapterNoAndName
-} from "../actions/fetch-data/fetch-data";
+import { getChapters, updateChapterNoAndName } from "../actions";
 
 class ChapterListComponent extends Component {
   componentDidMount() {

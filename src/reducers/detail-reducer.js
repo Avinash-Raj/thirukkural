@@ -1,18 +1,10 @@
 // @flow
 
-import {
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS
-} from "../constants/action-types";
 import detailsjson from "../data/detail.json";
 import kuraljson from "../data/thirukkural.json";
 
 initialState = {
-  info: {},
-  lang: "ta",
-  isLoading: false,
-  error: false
+  lang: "ta"
 };
 
 const getSection = sectionId => {

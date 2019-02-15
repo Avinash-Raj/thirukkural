@@ -1,8 +1,6 @@
 // @flow
-import { fetchChapterGroups } from "../../services/http-requests";
-import { fetchDataError } from "./fetch-data-error";
-import { fetchDataRequest } from "./fetch-data-request";
-import { fetchDataSuccess } from "./fetch-data-success";
+// actions
+// An action is a plain object describing what happened
 
 export const getChapters = () => {
   return { type: "GET_CHAPTERS", payload: {} };
