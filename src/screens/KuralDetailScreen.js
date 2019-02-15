@@ -10,17 +10,19 @@ export default class KuralDetailScreen extends Component {
   };
   renderDetails() {
     let detail = this.props.navigation.state.params.details;
-    if (this.props.lang === "en") {
+    if (this.props.navigation.state.params.lang === "en") {
       return (
         <View style={styles.container}>
           <Text style={styles.kural}>
+            {detail.couplet} {"\n"}
+          </Text>
+          <Text style={styles.explanation}>
+            <Text style={styles.bold}>Translation : </Text>
             {detail.Translation} {"\n"}
           </Text>
           <Text style={styles.explanation}>
-            Explanation: {detail.explanation} {"\n"}
-          </Text>
-          <Text style={styles.explanation}>
-            Couplet: {detail.couplet} {"\n"}
+            <Text style={styles.bold}>Explanation : </Text> {detail.explanation}{" "}
+            {"\n"}
           </Text>
         </View>
       );
@@ -33,13 +35,14 @@ export default class KuralDetailScreen extends Component {
             {detail.Line2}
           </Text>
           <Text style={styles.explanation}>
-            mv: {detail.mv} {"\n"}
+            <Text style={styles.bold}>மு.வரதராசனார் : </Text> {detail.mv} {"\n"}
           </Text>
           <Text style={styles.explanation}>
-            sp: {detail.sp} {"\n"}
+            <Text style={styles.bold}>சாலமன் பாப்பையா : </Text> {detail.sp}
+            {"\n"}
           </Text>
           <Text style={styles.explanation}>
-            mk: {detail.mk} {"\n"}
+            <Text style={styles.bold}>மு. கருணாநிதி : </Text> {detail.mk} {"\n"}
           </Text>
         </View>
       );
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20
   },
-  kural: { padding: 10, fontSize: 15, fontWeight: "bold" },
+  kural: { padding: 10, fontSize: 16, fontWeight: "bold" },
+  bold: { fontSize: 16, fontWeight: "bold" },
   explanation: { padding: 10 }
 });

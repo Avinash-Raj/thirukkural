@@ -15,7 +15,6 @@ export default class ChapterScreen extends Component {
     return (
       <ScrollView>
         <ChapterListComponent />
-        <Button title="Back" onPress={() => this.props.navigation.goBack()} />
       </ScrollView>
     );
   }

@@ -20,10 +20,6 @@ export default class ChapterGroupScreen extends React.Component {
         <ChapterGroupListComponent
           sectionId={this.props.navigation.getParam("no")}
         />
-        <Button
-          title="Back to home"
-          onPress={() => this.props.navigation.navigate("Home")}
-        />
       </ScrollView>
     );
   }

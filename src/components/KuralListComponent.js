@@ -11,7 +11,7 @@ class KuralListComponent extends Component {
   }
   renderText(kural) {
     if (this.props.lang === "en") {
-      return kural.Translation;
+      return kural.couplet;
     } else {
       return kural.Line1 + "\n" + kural.Line2;
     }
@@ -40,6 +40,7 @@ class KuralListComponent extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("kural list lang, ", state.details.lang);
   return {
     kurals: state.details.kurals || [],
     lang: state.details.lang

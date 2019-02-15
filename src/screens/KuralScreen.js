@@ -15,7 +15,6 @@ export default class KuralScreen extends Component {
     return (
       <ScrollView>
         <KuralListComponent />
-        <Button title="Back" onPress={() => this.props.navigation.goBack()} />
       </ScrollView>
     );
   }
