@@ -13,6 +13,7 @@ import {
   TouchableHighlight
 } from "react-native";
 import Modal from "react-native-modal";
+import SplashScreen from "react-native-splash-screen";
 import strings from "../strings";
 import { updateSectionId, updateLanguage } from "../actions";
 
@@ -28,6 +29,10 @@ class HomeScreen extends Component {
     this.props.navigation.setParams({
       openModal: this.modal.bind(this)
     });
+    // SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 300);
   }
   modal() {
     this.setModalVisible(true);

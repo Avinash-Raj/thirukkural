@@ -13,6 +13,7 @@
     "react-native-localization": "^2.0.3",
     "react-native-modal": "^7.0.2",
     "react-native-navigation": "^2.10.0",
+    "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^3.2.1",
     "react-navigation-drawer": "^1.1.0",
