@@ -56,6 +56,7 @@ export default class KuralDetailScreen extends Component {
               content={detail.munu}
             />
             <UraiComponent writer={strings.writers.sp} content={detail.sp} />
+            <UraiComponent writer={strings.writers.mk} content={detail.mk} />
             <UraiComponent
               writer={strings.writers.pari}
               content={detail.pari}
@@ -64,7 +65,6 @@ export default class KuralDetailScreen extends Component {
               writer={strings.writers.mani}
               content={detail.mani}
             />
-            <UraiComponent writer={strings.writers.mk} content={detail.mk} />
           </View>
         </View>
       );
