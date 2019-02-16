@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
+import strings from "../strings";
+
+const UraiComponent = ({ writer, content }) => (
+  <Text style={styles.explanation}>
+    <Text style={styles.bold}>{writer} : </Text> {content} {"\n"}
+  </Text>
+);
 
 export default class KuralDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -34,16 +41,31 @@ export default class KuralDetailScreen extends Component {
             {"\n"}
             {detail.Line2}
           </Text>
-          <Text style={styles.explanation}>
-            <Text style={styles.bold}>மு.வரதராசனார் : </Text> {detail.mv} {"\n"}
-          </Text>
-          <Text style={styles.explanation}>
-            <Text style={styles.bold}>சாலமன் பாப்பையா : </Text> {detail.sp}
-            {"\n"}
-          </Text>
-          <Text style={styles.explanation}>
-            <Text style={styles.bold}>மு. கருணாநிதி : </Text> {detail.mk} {"\n"}
-          </Text>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text style={styles.kural}>உரைகள்</Text>
+          </View>
+          <View>
+            <UraiComponent writer={strings.writers.mv} content={detail.mv} />
+            <UraiComponent
+              writer={strings.writers.munu}
+              content={detail.munu}
+            />
+            <UraiComponent writer={strings.writers.sp} content={detail.sp} />
+            <UraiComponent
+              writer={strings.writers.pari}
+              content={detail.pari}
+            />
+            <UraiComponent
+              writer={strings.writers.mani}
+              content={detail.mani}
+            />
+            <UraiComponent writer={strings.writers.mk} content={detail.mk} />
+          </View>
         </View>
       );
     }
@@ -59,5 +81,5 @@ const styles = StyleSheet.create({
   },
   kural: { padding: 10, fontSize: 16, fontWeight: "bold" },
   bold: { fontSize: 16, fontWeight: "bold" },
-  explanation: { padding: 10 }
+  explanation: { padding: 5 }
 });

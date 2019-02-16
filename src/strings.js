@@ -8,7 +8,15 @@ let strings = new LocalizedStrings({
     Kaamaththuppaal: "காமத்துப்பால்",
     section: "பால்",
     chapters: "அதிகாரம்",
-    tamil: "தமிழ்"
+    tamil: "தமிழ்",
+    writers: {
+      mv: "மு.வரதராசனார்",
+      sp: "சாலமன் பாப்பையா",
+      mk: "மு.கருணாநிதி",
+      pari: "பரிமேலழகர்",
+      munu: "வீ.முனிசாமி",
+      mani: "மணக்குடவர்"
+    }
   },
   en: {
     appname: "Thirukkural",
