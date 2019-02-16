@@ -32,7 +32,7 @@ class HomeScreen extends Component {
     // SplashScreen.hide();
     setTimeout(() => {
       SplashScreen.hide();
-    }, 200);
+    }, 300);
   }
   modal() {
     this.setModalVisible(true);
