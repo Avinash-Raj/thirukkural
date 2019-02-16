@@ -3,6 +3,8 @@ package com.thirukkural;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import org.devio.rn.splashscreen.SplashScreen;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new ReactNativeLocalizationPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage()
@@ -44,7 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
   }
 
   @Override
-  public void onCreate() {
+  public void onCreate() { 
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
