@@ -9,8 +9,7 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
-  Picker,
-  TouchableHighlight
+  Picker
 } from "react-native";
 import Modal from "react-native-modal";
 import SplashScreen from "react-native-splash-screen";
@@ -29,10 +28,7 @@ class HomeScreen extends Component {
     this.props.navigation.setParams({
       openModal: this.modal.bind(this)
     });
-    // SplashScreen.hide();
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 300);
+    SplashScreen.hide();
   }
   modal() {
     this.setModalVisible(true);
@@ -118,7 +114,7 @@ class HomeScreen extends Component {
               <Picker
                 mode="dropdown"
                 selectedValue={this.props.lang}
-                style={{ height: 50, width: 120, padding: 10 }}
+                style={{ height: 50, width: 150, padding: 10 }}
                 onValueChange={(itemValue, itemIndex) => {
                   strings.setLanguage(itemValue);
                   this.props.updateLanguage(itemValue);
@@ -128,13 +124,15 @@ class HomeScreen extends Component {
                 <Picker.Item label="தமிழ்" value="ta" />
                 <Picker.Item label="English" value="en" />
               </Picker>
-              <Button
-                style="{{ marginLeft: 10, }}"
-                onPress={() => {
-                  this.setModalVisible(false);
-                }}
-                title="OK"
-              />
+              <View style={{ width: 50 }}>
+                <Button
+                  style="{{ marginLeft: 10, width: 100 }}"
+                  onPress={() => {
+                    this.setModalVisible(false);
+                  }}
+                  title="OK"
+                />
+              </View>
             </View>
           </Modal>
         </SafeAreaView>
@@ -160,7 +158,8 @@ const styles = StyleSheet.create({
   modalHeader: {
     justifyContent: "center",
     borderColor: "grey",
-    padding: 10
+    padding: 10,
+    width: 150
   },
   modalContent: {
     backgroundColor: "white",
