@@ -51,10 +51,12 @@ export default class KuralDetailScreen extends Component {
           </View>
           <View>
             <UraiComponent writer={strings.writers.mv} content={detail.mv} />
-            <UraiComponent
-              writer={strings.writers.munu}
-              content={detail.munu}
-            />
+            {detail.munu.length > 0 && (
+              <UraiComponent
+                writer={strings.writers.munu}
+                content={detail.munu}
+              />
+            )}
             <UraiComponent writer={strings.writers.sp} content={detail.sp} />
             <UraiComponent writer={strings.writers.mk} content={detail.mk} />
             <UraiComponent
